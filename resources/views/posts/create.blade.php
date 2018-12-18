@@ -21,21 +21,21 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name='title' aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="text" class="form-control" id="title" value="{{old('title')}}" name='title' aria-describedby="emailHelp" placeholder="Enter email">
             @if($errors->has('title'))
               <span class="help-block errors-message">{{ $errors->first('title') }}</span>
             @endif
           </div>
           <div class="form-group">
             <label for="content">Content</label>
-            <input type="text" class="form-control" id="content" name='content' placeholder="Content">
+            <textarea class="form-control" id="content" name='content' placeholder="Content" cols="30" rows='15'>{{old('content')}}</textarea>
             @if($errors->has('content'))
               <span class="help-block errors-message">{{ $errors->first('content') }}</span>
             @endif
           </div>
           <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" class="form-control" id="image" name='image_url' placeholder="Content">
+            <input type="file" class="form-control" id="image" name='image_url' value="{{ old('image_url') }}" placeholder="Content">
             @if($errors->has('image_url'))
               <span class="help-block errors-message">{{ $errors->first('image_url') }}</span>
             @endif

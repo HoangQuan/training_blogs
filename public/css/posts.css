@@ -12,3 +12,12 @@
 	float: right;
 	width: 70%;
 }
+
+.img-thumbnail {
+	width: 150px;
+}
+
+.sidebar-title p {
+	font-size: 15px;
+	margin: 0 0 0 -20px;
+}

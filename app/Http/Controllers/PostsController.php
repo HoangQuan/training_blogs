@@ -16,4 +16,10 @@ class PostsController extends Controller
     }
     return view("posts.index", compact('posts'));
   }
+
+  public function show($id) {
+    $post = Post::find($id);
+    $new_posts = Post::whereNotIn('id', [$id])->orderBy('updated_at')->take(5)->get();
+    return view("posts.show", compact('post', 'new_posts'));
+  }
 }

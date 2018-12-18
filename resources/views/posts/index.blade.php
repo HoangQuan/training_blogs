@@ -1,6 +1,6 @@
 @extends('layouts.blog')
 @section('content')
-	<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+	<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -29,12 +29,14 @@
         </div>
       </div>
     </div>
-
     <hr>
 @stop
+
+
 @section('css')
-<link rel="stylesheet" type="text/css" href="css/posts.css">
+<link rel="stylesheet" type="text/css" href="/css/posts.css">
 @stop
+
 @section('js')
   <script type="text/javascript">
     hasMore = "{{ $posts->hasMorePages()}}";

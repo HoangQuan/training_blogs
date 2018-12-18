@@ -17,6 +17,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+          @if(Session::has('post_create'))
+            <p class="alert {{ Session::has('post_create') ? 'alert-info' : '' }}">{{ Session::get('post_create') }}</p>
+          @endif
           <div id='list-posts'>
             @include('posts._list')
           </div>

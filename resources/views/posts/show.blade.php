@@ -24,7 +24,7 @@
         <div class="col-9">
           <h1>{{$post->title}}</h1>
           
-          <img src="{{$post->image_url}}">
+          <img width='100%' src="{{$post->image_url}}">
           <p>{{$post->content}}</p>
         </div>
 

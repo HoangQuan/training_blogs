@@ -17,34 +17,55 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          @foreach($posts as $post)
-          <div class="post-preview">
-            <a href="post.html">
-              <div class="index-img-list"><img src="{{$post->image_url}}"></div>
-              <div>
-                <h2 class="post-title">
-                  {{ $post->title}}
-                </h2>
-                <h3 class="post-subtitle">
-                  {{$post->content}}
-                </h3>
-              </div>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Quanhv</a>
-              on {{$post->created_at}}</p>
+          <div id='list-posts'>
+            @include('posts._list')
           </div>
-          <hr>
-          @endforeach
 
           {{ $posts->links() }}
           <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <div class="clearfix" id="load_more_div" >
+            <a class="btn btn-primary float-right" data-href='#' onclick="loadMore();">Older Posts &rarr;</a>
           </div>
         </div>
       </div>
     </div>
 
     <hr>
+@stop
+@section('css')
+<link rel="stylesheet" type="text/css" href="css/posts.css">
+@stop
+@section('js')
+  <script type="text/javascript">
+    hasMore = "{{ $posts->hasMorePages()}}";
+    if (hasMore) {
+      html = '<a class="btn btn-primary float-right" onclick="loadMore();" data-href="{{$posts->nextPageUrl()}}">Older Posts &rarr;</a>'
+    }    
+    $('#load_more_div').html(html);
+
+    // $(document).ready(function() {
+      function loadMore(){
+        var url = $('#load_more_div .float-right').data('href');
+        console.log(url);
+        $.ajax({
+            type : 'GET',
+            url: url,
+            success : function(data){
+              console.log(data);
+              if(data.length == 0){
+              }else{
+                $('#list-posts').append(data.html);
+                if(data.hasMore)
+                  var html = '<a class="btn btn-primary float-right" onclick="loadMore();" data-href="' + data.url + '">Older Posts &rarr;</a>';
+                else
+                  html = '';
+                $('#load_more_div').html(html);
+              }
+            },error: function(data){
+
+            },
+        })
+      };
+    // });
+  </script>
 @stop

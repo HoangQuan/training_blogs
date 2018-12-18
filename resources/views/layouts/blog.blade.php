@@ -2,6 +2,7 @@
 <html lang="en">
 
   @include('layouts.header')
+  @yield('css')
 
   <body>
   	@include('layouts.nav')
@@ -16,7 +17,9 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
-    
+
+    @yield('js')
+
   </body>
 
 </html>

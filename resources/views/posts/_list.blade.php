@@ -8,7 +8,7 @@
         </h3>
       </a>
       <p class="post-subtitle">
-        {{ str_limit($post->content, $limit = 100, $end = trans('common.view_more')) }}
+        {!! str_limit($post->content, $limit = 100, $end = trans('common.view_more')) !!}
       </p>
     </div>
     <p class="post-meta">Posted by

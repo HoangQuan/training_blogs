@@ -25,7 +25,7 @@
           <h1>{{$post->title}}</h1>
           
           <img width='100%' src="{{$post->image_url}}">
-          <p>{{$post->content}}</p>
+          <p>{!! $post->content !!}</p>
         </div>
 
         <div class="col-3" style="border: 1px solid;">

@@ -51,8 +51,8 @@ class PostsController extends Controller
     } else {
       // DB::beginTransaction();
       $image = $request->file('image_url');
-      $image_name = time().'-'.$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
-      $store_path = '/upload/images/posts/'.$request->input('type').'/';
+      $image_name = time().'-'.$image->getClientOriginalName();
+      $store_path = '/upload/images/posts/';
       $destinationPath = public_path($store_path);
       $image->move($destinationPath, $image_name);
       
@@ -69,4 +69,53 @@ class PostsController extends Controller
       return redirect('posts');
     }
   }
+
+  public function edit($id) {
+    $post = Post::find($id);
+    return view("posts.edit", compact('post'));
+  }
+
+  public function update(Request $request, $id) {
+    // Kiểm tra dữ liệu
+    $validator = Validator::make($request->all(), [
+      'title' => 'required|unique:posts,title,'.$id.'|max:255',
+      'content' => 'required',
+      'image_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ], $messages = [
+      'title.required' => trans('post.title_required'),
+      'title.unique' => trans('post.title_unique'),
+      'content.required' => trans('post.title_content'),
+      'image_url.required' => trans('post.image_require'),
+      'image_url.image' => trans('post.image_image'),
+      'image_url.mimes' => trans('post.image_mimes'),
+      'image_url.max' => trans('post.image_max'),
+    ]);
+
+    $post = Post::find($id);
+    if ($validator->fails()) {
+        $request->flash();
+        return view('posts.edit', compact('post'))->withErrors($validator);
+    } else {
+      // DB::beginTransaction();
+      $update_columns = [
+        'title' => $request->input('title'),
+        'content' => $request->input('content'),
+        'user_id' => 1,
+      ];
+      if ($request->has('image_url')) {
+        $image = $request->file('image_url');
+        $image_name = time().'-'.$image->getClientOriginalName();
+        $store_path = '/upload/images/posts/';
+        $destinationPath = public_path($store_path);
+        $image->move($destinationPath, $image_name);
+        $update_columns['image_url'] = $store_path.$image_name;
+      }
+      $post->update($update_columns);
+
+      // DB::commit();
+      $request->session()->flash('post_create', 'Sửa thành công!');
+      return redirect('posts');
+    }
+  }
+
 }

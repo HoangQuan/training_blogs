@@ -1,0 +1,39 @@
+.index-img-list {
+  float: left;
+  width: 20%;
+}
+
+.index-img-list img {
+	width: 100%;
+	padding: 5px;
+}
+
+.index-content {
+	float: right;
+	width: 70%;
+}
+
+.img-thumbnail {
+	width: 150px;
+}
+
+.sidebar-title p {
+	font-size: 15px;
+	margin: 0 0 0 -20px;
+}
+
+.errors-message {
+	color: red;
+}
+
+.user-infor p {
+	margin: 5px 10px 0;
+}
+
+.circles {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 0 auto;
+}

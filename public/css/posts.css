@@ -25,3 +25,15 @@
 .errors-message {
 	color: red;
 }
+
+.user-infor p {
+	margin: 5px 10px 0;
+}
+
+.circles {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 0 auto;
+}

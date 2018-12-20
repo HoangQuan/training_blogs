@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <label for="content">Content</label>
-            <textarea class="form-control" id="content" name='content' placeholder="Content" cols="30" rows='15'>{{old('content')}}</textarea>
+            <textarea class="form-control ckeditor" id="content" name='content' placeholder="Content" cols="30" rows='15'>{{old('content')}}</textarea>
             @if($errors->has('content'))
               <span class="help-block errors-message">{{ $errors->first('content') }}</span>
             @endif
@@ -43,9 +43,33 @@
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
+
+      <div class="col-3">
+        <div class="row" style="border: 1px solid;">
+          <div class="col-12 user-infor">
+            <a href="https://www.facebook.com/zoro.kunkun">
+              <img width='100%' class="circles" src="https://scontent.fhan4-1.fna.fbcdn.net/v/t31.0-8/860425_695227343875090_8043973826892118225_o.jpg?_nc_cat=104&_nc_ht=scontent.fhan4-1.fna&oh=6d594f7f03076f13843933e8bcbad27a&oe=5C98F807">
+            </a>
+            <hr />
+          </div>
+
+          <div class="col-12 user-infor">
+            <p>Hoàng Văn Quân</p>
+            <p>Tuổi: 19</p>
+            <p>Giới tính: Nam</p>
+            <p>Bài viết: 100</p>
+            <p>Đã thích: 100</p>
+            <p>Được thích: 100</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 @stop
 @section('css')
 <link rel="stylesheet" type="text/css" href="/css/posts.css">
 @stop
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace( 'summary-ckeditor' );
+</script>

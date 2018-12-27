@@ -5,6 +5,7 @@ use DB;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
+use File;
 
 class PostsController extends Controller
 {
@@ -108,9 +109,12 @@ class PostsController extends Controller
         $store_path = '/upload/images/posts/';
         $destinationPath = public_path($store_path);
         $image->move($destinationPath, $image_name);
+        // unlink(public_path($post->image_url));
+        File::delete(public_path($post->image_url));
         $update_columns['image_url'] = $store_path.$image_name;
       }
       $post->update($update_columns);
+      Post::updateOrCreate($update_columns);
 
       // DB::commit();
       $request->session()->flash('post_create', 'Sửa thành công!');

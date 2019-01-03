@@ -20,8 +20,8 @@ class PostsController extends Controller
   }
 
   public function show($id) {
-    $post = Post::find($id);
     Post::increaseViews($id);
+    $post = Post::find($id);
     $new_posts = Post::whereNotIn('id', [$id])->orderBy('updated_at')->take(5)->get();
     return view("posts.show", compact('post', 'new_posts'));
   }

@@ -21,8 +21,6 @@ class Post extends Model
 	];
 
 	static public function increaseViews($id) {
-		return Post::where('id', $id)->update([
-      'view_count'=> DB::raw('view_count+1')
-    ]);
+		return Post::where('id', $id)->update(['view_count'=> DB::raw('view_count+1')]);
 	}
 }

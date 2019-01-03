@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/login', 'HomeController@login')->name('login');
+Route::post('/dologin', 'HomeController@doLogin')->name('doLogin');
+Route::post('/logout', 'HomeController@logout')->name('logout');
+
+Route::post('/register', 'HomeController@index')->name('register');
+
 Route::get('/', 'PostsController@index')->name('root');
 Route::get('/home', 'PostsController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -24,6 +31,6 @@ Route::get('/contact', 'HomeController@about')->name('contact');
 // ajax 
 Route::get('ajax/nextPage', 'PostsController@nextPage')->name('ajax.nextPage');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

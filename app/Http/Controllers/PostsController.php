@@ -9,6 +9,12 @@ use File;
 
 class PostsController extends Controller
 {
+  public function __construct()
+  {
+    // $this->middleware('auth');
+    $this->setting = 1;
+  }
+
   public function index(Request $request)
   {
     $posts = Post::orderBy('id', 'desc')->paginate(6); // simplePaginate for only next and prevous link
@@ -20,6 +26,7 @@ class PostsController extends Controller
   }
 
   public function show($id) {
+    // $this->middleware('auth');
     $post = Post::find($id);
     Post::increaseViews($id);
     $new_posts = Post::whereNotIn('id', [$id])->orderBy('updated_at')->take(5)->get();

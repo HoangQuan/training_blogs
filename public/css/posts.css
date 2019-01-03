@@ -30,6 +30,10 @@
 	margin: 5px 10px 0;
 }
 
+.user-infor1 {
+	height: 600px;
+}
+
 .circles {
     border-radius: 50%;
     width: 200px;

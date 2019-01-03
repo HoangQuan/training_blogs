@@ -32,6 +32,8 @@
         </div>
 
         <div class="col-3" style="border: 1px solid;">
+          @include('partials.user_infor')
+          
           <h6>{{ trans('common.new_post') }}</h6>
           @foreach($new_posts as $new_post)
             <div class="row" style="margin-bottom: 20px;">

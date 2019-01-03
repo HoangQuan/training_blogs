@@ -30,6 +30,10 @@
             <a class="btn btn-primary float-right" data-href='#' onclick="loadMore();">Older Posts &rarr;</a>
           </div>
         </div>
+        <div class="col-3">
+          @include('partials.user_infor')
+        </div>
+      </div>
       </div>
     </div>
     <hr>

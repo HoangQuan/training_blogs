@@ -69,7 +69,8 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="/css/posts.css">
 @stop
-<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-<script>
-    CKEDITOR.replace( 'summary-ckeditor' );
-</script>
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        $('textarea').ckeditor();
+        // $('.textarea').ckeditor(); // if class is prefered.
+    </script>

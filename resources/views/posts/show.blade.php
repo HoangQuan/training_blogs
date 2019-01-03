@@ -23,6 +23,9 @@
       <div class="row">
         <div class="col-9">
           <h1>{{$post->title}}</h1>
+          <span class="icon fa fa-eye" aria-hidden="true">{{$post->view_count}}</span>
+          <span class="icon fa fa-thumbs-up" aria-hidden="true">{{$post->like_count}}</span>
+          <span class="icon fa fa-thumbtack" aria-hidden="true">1000</span>
           
           <img width='100%' src="{{$post->image_url}}">
           <p>{!! $post->content !!}</p>

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class Post extends Model
 {
 	// 
@@ -20,4 +20,9 @@ class Post extends Model
 		'status',
 	];
 
+	static public function increaseViews($id) {
+		return Post::where('id', $id)->update([
+      'view_count'=> DB::raw('view_count+1')
+    ]);
+	}
 }

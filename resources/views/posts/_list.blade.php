@@ -11,6 +11,9 @@
         {!! str_limit($post->content, $limit = 100, $end = trans('common.view_more')) !!}
       </p>
     </div>
+    <span class="fa fa-eye" aria-hidden="true">{{(int)$post->view_count}}</span>
+    <span class="fa fa-thumbs-up" aria-hidden="true">{{(int)$post->like_count}}</span>
+    <span class="fa fa-thumbtack" aria-hidden="true">1000</span>
     <p class="post-meta">Posted by
       <a href="#">Quanhv</a>
       on {{$post->created_at}}</p>

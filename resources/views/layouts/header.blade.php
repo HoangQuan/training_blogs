@@ -6,7 +6,7 @@
     <meta name="author" content="">
 
     <title>Clean Blog - Start Bootstrap Theme</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

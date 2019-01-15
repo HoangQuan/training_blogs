@@ -25,4 +25,10 @@ class Post extends Model
       'view_count'=> DB::raw('view_count+1')
     ]);
 	}
+
+	static public function increaseLikes($id) {
+		return Post::where('id', $id)->update([
+	      'view_count'=> DB::raw('like_count+1')
+	    ]);
+	}
 }

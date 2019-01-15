@@ -1,4 +1,33 @@
 @extends('layouts.blog')
+
+@section('js')
+<script type="text/javascript">
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $('.like-icon').on('click', function(){
+    var id = $(this).data('id');
+    $.ajax({
+      type : 'POST',
+      url: '/ajax/like',
+      data: {post_id: id},
+      success : function(data){
+        if(data.status){
+          var like = $('.fa-thumbs-up').html();
+          $('.fa-thumbs-up').html(1 + parseInt(like) );
+        }else{
+          alert(data.message.post_id);
+        }
+      },error: function(data){
+
+      },
+  })
+  });
+</script>
+@stop
+
 @section('content')
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('/img/post-bg.jpg')">
@@ -29,6 +58,11 @@
           
           <img width='100%' src="{{$post->image_url}}">
           <p>{!! $post->content !!}</p>
+
+          <div>
+            Bài viết này có hữu ích với bạn không? 
+            <span class="icon fa fa fa-thumbs-up like-icon" data-id="{{$post->id}}"></span> Hoặc <span class="icon fa fa fa-thumbs-down dislike-icon" data-id="{{$post->id}}"></span>
+          </div>
         </div>
 
         <div class="col-3" style="border: 1px solid;">
@@ -49,4 +83,22 @@
 @stop
 @section('css')
 <link rel="stylesheet" type="text/css" href="/css/posts.css">
+<style type="text/css">
+  .like-icon {
+    zoom: 2;
+    color: #e00606;
+  }
+
+  .dislike-icon {
+    zoom: 2;
+    color: #e00606;
+    margin-left: 10px;
+  }
+
+  .like-icon:hover, .dislike-icon:hover {
+    color: #212529;
+    zoom: 3;
+  }
+
+</style>
 @stop

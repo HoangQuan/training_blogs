@@ -14,4 +14,5 @@ class Like extends Model
 		'user_id',
 		'post_id',
 	];
+
 }

@@ -14,12 +14,13 @@ Route::group(['middleware' => ['auth']], function (){
 	Route::get('/', 'PostsController@index')->name('root');
 	Route::get('/home', 'PostsController@index')->name('home');
 	Route::get('/about', 'HomeController@about')->name('about');
-	Route::get('/posts', 'PostsController@index')->name('posts');
+	
 	Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 	Route::post('/posts/store', 'PostsController@store')->name('posts.store');
 	Route::get('/posts/edit/{id}', 'PostsController@edit')->name('posts.edit');
 	Route::post('/posts/update/{id}', 'PostsController@update')->name('posts.update');
 });
+Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/posts/show/{id}', 'PostsController@show')->name('posts.show');
 
 Route::get('/contact', 'HomeController@about')->name('contact')->middleware('auth');

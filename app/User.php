@@ -27,4 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // 1 user - cos nhieu Posts
+    public function posts() {
+        // return $this->hasMany('App\Models\Post', 'foreign_key', 'local_key');
+        return $this->hasMany('App\Models\Post');
+    }
 }

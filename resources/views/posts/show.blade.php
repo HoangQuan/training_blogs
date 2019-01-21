@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('js')
+<script src="/slick/slick.js"></script>
 <script type="text/javascript">
   $.ajaxSetup({
       headers: {
@@ -24,6 +25,42 @@
 
       },
   })
+  });
+  $(document).ready(function(){
+    $('.slick-slider').slick({
+      dots: false,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 4,
+      autoplay: true,
+      autoplaySpeed: 1000,
+      slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
   });
 </script>
 @stop
@@ -61,8 +98,24 @@
 
           <div>
             Bài viết này có hữu ích với bạn không? 
-            <span class="icon fa fa fa-thumbs-up like-icon" data-id="{{$post->id}}"></span> Hoặc <span class="icon fa fa fa-thumbs-down dislike-icon" data-id="{{$post->id}}"></span>
+            <span class="icon fa fa fa-thumbs-up like-icon" data-id="{{$post->id}}"></span> Hoặc <span class="icon fa fa fa-thumbs-down dislike-icon" data-dislike-id="{{$post->id}}"></span>
           </div>
+
+          @if(count($rel_posts))
+            <h3>Bài viết cùng tác giả</h3>
+            <div class="slick-slider">
+              @foreach($rel_posts as $post)
+                <div class='slick-slider-item'>
+                  <div class='slick-slider-image'>
+                    <img src="{{$post->image_url}}">
+                  </div>
+                  <div class='slick-slider-title'>
+                    <h3>{{$post->title}}</h3>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          @endif
         </div>
 
         <div class="col-3" style="border: 1px solid;">
@@ -83,6 +136,8 @@
 @stop
 @section('css')
 <link rel="stylesheet" type="text/css" href="/css/posts.css">
+<link href="{{ asset('slick/slick.css') }}" rel="stylesheet">
+<link href="{{ asset('slick/slick-theme.css') }}" rel="stylesheet">
 <style type="text/css">
   .like-icon {
     zoom: 2;

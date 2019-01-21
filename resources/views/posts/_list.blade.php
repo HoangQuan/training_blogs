@@ -15,8 +15,9 @@
     <span class="fa fa-thumbs-up" aria-hidden="true">{{(int)$post->like_count}}</span>
     <span class="fa fa-thumbtack" aria-hidden="true">1000</span>
     <p class="post-meta">Posted by
-      <a href="#">Quanhv</a>
-      on {{$post->created_at}}</p>
+      <!-- {{ $post->user_id }} -->
+      <a href="">{{ $post->user->email }}</a>
+      at {{$post->created_at}}</p>
   </div>
   <hr>
 @endforeach

@@ -6,18 +6,20 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
 use File;
+use Auth;
 
 class PostsController extends Controller
 {
   public function __construct()
   {
     // $this->middleware('auth');
-    $this->setting = 1;
+    // $this->setting = 1;
   }
 
   public function index(Request $request)
   {
-    $posts = Post::orderBy('id', 'desc')->paginate(6); // simplePaginate for only next and prevous link
+    // Vấn đề N+1 giải quyết bằng enger load with
+    $posts = Post::with('user')->orderBy('id', 'desc')->paginate(6); // simplePaginate for only next and prevous link
     if ($request->ajax()) {
       $view = view('posts._list', compact('posts'))->render();
       return response()->json(['html'=>$view, 'url' => $posts->nextPageUrl(), 'hasMore' => $posts->hasMorePages()]);
@@ -28,11 +30,17 @@ class PostsController extends Controller
   public function show($id) {
     // $this->middleware('auth');
     $post = Post::find($id);
+
+    // Ứng dụng của has_nany
+    // Lấy ra hết những bài viết của cùng tác giả này
+    // Bình thường sẽ dùng query: rel_posts = Post::where('user_id', $post->user_id);
+    // Dùng Quan hệ:
+    $rel_posts = $post->user->posts()->orderBy('updated_at', 'DESC')->take(5)->get();
+
     Post::increaseViews($id);
     $new_posts = Post::whereNotIn('id', [$id])->orderBy('updated_at')->take(5)->get();
-    return view("posts.show", compact('post', 'new_posts'));
+    return view("posts.show", compact('post', 'new_posts', 'rel_posts'));
   }
-
 
   public function create() {
     return view("posts.create");
@@ -70,7 +78,7 @@ class PostsController extends Controller
         'title' => $request->input('title'),
         'image_url' => $store_path.$image_name,
         'content' => $request->input('content'),
-        'user_id' => 1,
+        'user_id' => Auth::user()->id,
       ]);
 
       // DB::commit();
@@ -109,7 +117,7 @@ class PostsController extends Controller
       $update_columns = [
         'title' => $request->input('title'),
         'content' => $request->input('content'),
-        'user_id' => 1,
+        'user_id' => Auth::user()->id,
       ];
       if ($request->has('image_url')) {
         $image = $request->file('image_url');
@@ -129,5 +137,4 @@ class PostsController extends Controller
       return redirect('posts');
     }
   }
-
 }

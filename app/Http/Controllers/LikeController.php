@@ -30,9 +30,10 @@ class LikeController extends Controller
 	    } else {
 
 	      // DB::beginTransaction();
-	      $like = new Like($request->all());
-	      $like->user_id = Auth::user()->id;
-	      $like->save();
+	      // $like = new Like($request->all());
+	      // $like->user_id = Auth::user()->id;
+	      // $like->save();
+	      Like::create(['user_id' => Auth::user()->id, 'post_id' => $request->input('post_id')]);
 
 	      Post::increaseLikes($request->input('post_id'));
 	      // DB::commit();

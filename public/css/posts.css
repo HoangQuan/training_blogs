@@ -44,3 +44,33 @@
 .icon {
 	margin-right: 10px;
 }
+
+.slick-slider-item {
+	width: 100%;
+    display: inline-block;
+    border: 1px #4848a5 solid;
+    height: 250px;
+    margin-left: 10px;
+}
+
+.slick-slider-image {
+	padding: 9px;
+	width: 100%;
+	height: 180px;
+}
+.slick-slider-image img {
+	width: 100%;
+	height: 180px;
+}
+
+.slick-slider-title {
+	background-color: #32f92f;
+    padding: 9px;
+    margin-top: 9px;
+    height: 23%;
+}
+.slick-slider-title h3 {
+    font-size: 14px;
+    /*margin-top: 5px;*/
+}
+

@@ -28,8 +28,8 @@ class PostsController extends Controller
   }
 
   public function show($id) {
-    // $this->middleware('auth');
-    $post = Post::find($id);
+    // Lazy loading comments
+    $post = Post::find($id)->load('comments');
 
     // Ứng dụng của has_nany
     // Lấy ra hết những bài viết của cùng tác giả này

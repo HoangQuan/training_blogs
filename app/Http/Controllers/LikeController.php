@@ -26,7 +26,7 @@ class LikeController extends Controller
 	    ]);
 
 	    if ($validator->fails()) {
-	        return response()->json(['status' => false, 'message' => $validator->errors()]);
+	        return response()->json(['status' => false, 'message' => $validator->errors()->first()]);
 	    } else {
 
 	      // DB::beginTransaction();

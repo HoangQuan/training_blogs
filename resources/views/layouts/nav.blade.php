@@ -39,7 +39,9 @@
                 </span>
             </li>
           @else
-            <a class="login-link" href="/login">{{ trans('common.signin') }}</a>
+            <li class="nav-item">
+              <a class="login-link" href="/login">{{ trans('common.signin') }}</a>
+            </li>
           @endif
         </li>
       </ul>

@@ -29,6 +29,7 @@ Route::get('/contact', 'HomeController@about')->name('contact')->middleware('aut
 Route::get('ajax/nextPage', 'PostsController@nextPage')->name('ajax.nextPage');
 Route::post('ajax/like', 'LikeController@like')->name('ajax.like');
 Route::post('ajax/dislike', 'LikeController@dislike')->name('ajax.dislike');
+Route::post('ajax/comment', 'CommentController@comment')->name('ajax.comment');
 
 Auth::routes();
 

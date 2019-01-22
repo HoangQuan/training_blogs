@@ -42,4 +42,10 @@ class Post extends Model
 	      'view_count'=> DB::raw('like_count+1')
 	    ]);
 	}
+
+	// 1 post - cos nhieu comment
+    public function comments() {
+        // return $this->hasMany('App\Models\Post', 'foreign_key', 'local_key');
+        return $this->hasMany('App\Models\Comment');
+    }
 }

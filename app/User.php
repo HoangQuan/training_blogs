@@ -19,6 +19,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    const ADMIN_TYPE = 1;
+    const DEFAULT_TYPE = 0;
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -32,5 +34,9 @@ class User extends Authenticatable
     public function posts() {
         // return $this->hasMany('App\Models\Post', 'foreign_key', 'local_key');
         return $this->hasMany('App\Models\Post');
+    }
+
+    public function isAdmin()    {        
+        return $this->type === self::ADMIN_TYPE;    
     }
 }
